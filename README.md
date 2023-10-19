@@ -19,22 +19,16 @@
     * config.json 模型的配置信息
     * G_3000.pth 主推理模型，用于推理
     * D_3000.pth 临时记录推理模型，用于再训练
-<br>
 * <strong>origin</strong> 
 用于存放待训练的音频
-<br>
 * <strong>vocal</strong> 
 用于存放替换目标的音频人声
-<br>
 * <strong>accompany</strong> 
 用于存放目标的音频伴奏
-<br>
 * <strong>temp_result</strong> 
 用于存放已经替换目标音频的人声，如果是 tts 文字转声音 + 声音替换声音，则此结果为最终结果
-<br>
 * <strong>result</strong> 
 用于存放已经替换目标音频的人声与伴奏合成的结果
-<br>
 * <strong>so-vits-svc</strong> 
 主训练预测模块，自动化脚本存放在此目录下
 
@@ -51,7 +45,6 @@
 > <strong>python audio_train.py -o 'ade' -n 'ade.wav'</strong>
 > 带最大训练步数
 > <strong>python audio_train.py -o 'ade' -n 'ade.wav' -s '3000'</strong>
-
 * <strong>audio_inference.py</strong> 
 包含声音预测，人声和伴奏合成的脚本
     * -o 训练的声音唯一标志
@@ -68,7 +61,6 @@
 > <strong>paudio_inference.py -o 'ade' -m 'G_3000.pth' -v 'vocal.wav' -a 'accompany.wav'</strong>
 * <strong>train.py</strong> 
 svc 的训练脚本，直接替换即可
-<br>
 * <strong>inference_main.py</strong> 
 svc 的预测脚本，直接替换即可
 
