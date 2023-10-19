@@ -70,5 +70,5 @@
 svc 的训练脚本，直接替换即可
 <br>
 * <strong>inference_main.py</strong> 
-svc 的预测脚本，直接替换即可>
+svc 的预测脚本，直接替换即可
 
