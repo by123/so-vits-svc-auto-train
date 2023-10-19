@@ -41,10 +41,10 @@
     * -n 待训练的人声的名称，放在 /root/origin 
     * -s 训练步数，用字符串类型
 
-> 不带最大训练步数(默认3000步)
- <strong>python audio_train.py -o 'ade' -n 'ade.wav'</strong>
- 带最大训练步数
- <strong>python audio_train.py -o 'ade' -n 'ade.wav' -s '3000'</strong>
+> ###### 不带最大训练步数(默认3000步)
+> <strong>python audio_train.py -o 'ade' -n 'ade.wav'</strong>
+> ###### 带最大训练步数
+> <strong>python audio_train.py -o 'ade' -n 'ade.wav' -s '3000'</strong>
 * <strong>audio_inference.py</strong> 
 包含声音预测，人声和伴奏合成的脚本
     * -o 训练的声音唯一标志
@@ -55,10 +55,10 @@
     语音替换的结果，放在 /root/temp_result 下
     与伴奏合成的结果，放在 /root/result 下
 
-> 用于人声替换人声，tts转语音
- <strong>python audio_inference.py -o 'ade' -m 'G_3000.pth' -v 'vocal.wav'</strong>
- 用于人声和伴奏的合成
- <strong>python audio_inference.py -o 'ade' -m 'G_3000.pth' -v 'vocal.wav' -a 'accompany.wav'</strong>
+> ###### 用于人声替换人声，tts转语音
+><strong>python audio_inference.py -o 'ade' -m 'G_3000.pth' -v 'vocal.wav'</strong>
+> ###### 用于人声和伴奏的合成
+> <strong>python audio_inference.py -o 'ade' -m 'G_3000.pth' -v 'vocal.wav' -a 'accompany.wav'</strong>
 * <strong>train.py</strong> 
 svc 的训练脚本，直接替换即可
 * <strong>inference_main.py</strong> 
