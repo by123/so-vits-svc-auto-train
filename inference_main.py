@@ -59,7 +59,6 @@ def main():
     parser.add_argument('-lgr', '--linear_gradient_retain', type=float, default=0.75, help='自动音频切片后，需要舍弃每段切片的头尾。该参数设置交叉长度保留的比例，范围0-1,左开右闭')
     parser.add_argument('-eak', '--enhancer_adaptive_key', type=int, default=0, help='使增强器适应更高的音域(单位为半音数)|默认为0')
     parser.add_argument('-ft', '--f0_filter_threshold', type=float, default=0.05,help='F0过滤阈值，只有使用crepe时有效. 数值范围从0-1. 降低该值可减少跑调概率，但会增加哑音')
-    parser.add_argument('-c', '--config_path', type=str, default="logs/44k/config.json", help='配置文件路径')
 
 
     args = parser.parse_args()
@@ -111,7 +110,7 @@ def main():
     
     infer_tool.fill_a_to_b(trans, clean_names)
     for clean_name, tran in zip(clean_names, trans):
-        raw_audio_path = f"raw/{clean_name}"
+        raw_audio_path = f"{clean_name}"
         if "." not in raw_audio_path:
             raw_audio_path += ".wav"
         infer_tool.format_wav(raw_audio_path)
@@ -144,6 +143,7 @@ def main():
             if only_diffusion : isdiffusion = "diff"
             if use_spk_mix:
                 spk = "spk_mix"
+            print('写入：' + res_path)
             soundfile.write(res_path, audio, svc_model.target_sample, format=wav_format)
             svc_model.clear_empty()
             

@@ -3,15 +3,15 @@ from pydub import AudioSegment
 import soundfile
 import argparse
 
-def inference(output, model, vocal, vocal_path):
+def inference(output, model, vocal, temp_result):
     model_path = '/root/models/' + output + '/' + model
     model_config = '/root/models/' + output + '/config.json'
     vocal_path = '/root/vocal/' + vocal
-    os.system('python inference_main.py -m ' + model_path + ' -c ' + model_config + ' -n ' + vocal_path + ' -t 0 -s ' + output + ' -f0p crepe -r ' + vocal_path)
+    os.system('python inference_main.py -m ' + model_path + ' -c ' + model_config + ' -n ' + vocal_path + ' -t 0 -s ' + output + ' -f0p crepe -r ' + temp_result)
 
     
-def mergeAudio(vocal_path, accompany, res_path):
-    vocalSeg = AudioSegment.from_wav(vocal_path)
+def mergeAudio(temp_result, accompany, res_path):
+    vocalSeg = AudioSegment.from_wav(temp_result)
     # 增加/减少音量
     vocal = vocal[:] + 8
     accompanySeg = AudioSegment.from_wav('/root/accompany/' + accompany)
@@ -23,7 +23,7 @@ def mergeAudio(vocal_path, accompany, res_path):
 
 if __name__=="__main__":
 
-    parser = argparse.ArgumentParser(description='AI Audio')
+    parser = argparse.ArgumentParser(description='Audio Inference')
     parser.add_argument('--output', '-o', type = str, default = 'by', required = True, help = '训练的声音唯一标志')
     parser.add_argument('--model', '-m', type = str, default = 'G_3000.pth' , required = True, help = '模型名称, 模型在 /root/models/#output#/xxx')
     parser.add_argument('--vocal','-v', type=str, default = 'vocal.wav', required = True, help = '目标音频人声,放在 /root/vocal 下')
@@ -41,7 +41,7 @@ if __name__=="__main__":
     vocal = args.vocal
     print('目标音频人声名称:' + vocal)
 
-    vocal_path = '/root/temp_result/' + args.result
+    temp_result = '/root/temp_result/' + args.result
     
     if args.accompany:
         accompany = args.accompany
@@ -49,13 +49,13 @@ if __name__=="__main__":
         print('目标音频伴奏名称:' + args.accompany)
 
     
-    print('保存目录:' + result)
+    print('保存目录:' + temp_result)
     print('-----开始预测-----')
-    inference(output, model, vocal, vocal_path)
+    inference(output, model, vocal, temp_result)
 
     if args.accompany:
         print('-----开始合并人声和伴奏-----')
-        mergeAudio(vocal_path, accompany, res_path)
+        mergeAudio(temp_result, accompany, res_path)
         print('合并完成，输出 /root/results/xxx.wav')
     
     
@@ -63,4 +63,4 @@ if __name__=="__main__":
 # audio_inference.py -o 'ade' -m 'G_3000.pth' -v 'vocal.wav'
 
 #### python 用于人声和伴奏的合成
-# audio_inference.py -o 'ade' -m 'G_3000.pth' -v 'vocal.wav' -a 'accompany.wav'
+# audio_inference.py -o 'ade' -m 'G_3000.pth' -v 'vocal.wav' -a 'accompany.wav' -r 'result.wav'
